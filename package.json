@@ -1,0 +1,19 @@
+{
+  "name": "rpi-car",
+  "version": "1.0.0",
+  "description": "Raspbery Pi WiFi controlled car",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amorganPD/rpi-car.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amorganPD/rpi-car/issues"
+  },
+  "homepage": "https://github.com/amorganPD/rpi-car#readme"
+}
