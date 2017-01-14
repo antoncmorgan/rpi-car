@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/amorganPD/rpi-car/issues"
   },
-  "homepage": "https://github.com/amorganPD/rpi-car#readme"
+  "homepage": "https://github.com/amorganPD/rpi-car#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
 }
