@@ -8,7 +8,10 @@ var pyForward = {
   args: ['40','40','1']
 }
 var pyBackward = {
-  args: ['0','0','0']
+  args: ['40','40','0']
+}
+var pyStop = {
+  args: ['0', '0', '0']
 }
 
 app.get('/', function (req, res) {
@@ -23,6 +26,11 @@ app.get('/', function (req, res) {
   else if (direction == 'backward') {
     python.run('./python/DCMotors.py', pyBackward, function () {
       console.log("Going Backwards");
+    });
+  }
+  else if (direction == 'stop') {
+    python.run('./python/DCMotors.py', pyStop, function() {
+      console.log("Stopping");
     });
   }
   res.send(direction);
