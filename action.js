@@ -1,6 +1,10 @@
 $("#forward").click(function(){
-    alert("Full steam ahead!");
+  $.get("http://192.168.1.91:3000/?direction=forward", function(data, status){
+        alert("Full steam ahead!");
+    });
 });
 $("#backward").click(function(){
-    alert("Take it back now, y'all!");
+ $.get("http://192.168.1.91:3000/?direction=backward", function(data, status){
+        alert("Take it back now, y'all");
+    });
 });
