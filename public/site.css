@@ -1,3 +1,6 @@
+body {
+    background-color: skyblue;
+}
 .wrapper {
     text-align: center;
    background-color: skyblue;
@@ -6,9 +9,10 @@
 }
 .direction {
     background-color: white;
-    margin: auto 0;
+    margin: 0em 1em 0em 1em;
     width: 10%;
-    border: 2px solid black;
+    height: 5%;
+    border: 0px solid black;
     border-radius: 5px;
     padding: 2em 2em 2em 2em;
     text-align: center;
@@ -16,4 +20,6 @@
 }
 .direction:hover{
     background-color: blue;
+     box-shadow: 10px 10px 5px #888888;
+     color: white;
 }
