@@ -14,6 +14,8 @@ var pyStop = {
   args: ['0', '0', '0']
 }
 
+app.use(express.static('public'))
+
 app.get('/', function (req, res) {
   var url_parts = url.parse(req.url, true);
   var query = url_parts.query;
