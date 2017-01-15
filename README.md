@@ -1,6 +1,6 @@
 # rpi-car - Raspbery Pi WiFi controlled car
 
-![RPi - Car](https://github.com/amorganPD/rpi-car/assets/rpi-car.jpg "RPi - Car")
+![RPi - Car](https://github.com/amorganPD/rpi-car/blob/master/assets/rpi-car.jpg "RPi - Car")
 
 ## Required Hardware
 
