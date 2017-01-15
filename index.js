@@ -14,7 +14,7 @@ var pyStop = {
   args: ['0', '0', '0']
 }
 
-app.use(express.static('public'))
+app.use('/public', express.static('public'))
 
 app.get('/', function (req, res) {
   var url_parts = url.parse(req.url, true);
