@@ -27,7 +27,6 @@ if len(sys.argv) > 2:
   else:
     Motor1.setSpeed(int(sys.argv[1]))
     Motor2.setSpeed(int(sys.argv[2]))
-    print(sys.argv[1] + "," + sys.argv[2]);
     if sys.argv[3] == '1':
       Motor1.run(Adafruit_MotorHAT.FORWARD);
       Motor2.run(Adafruit_MotorHAT.FORWARD);
