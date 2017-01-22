@@ -223,6 +223,10 @@ VirtualJoystick.prototype._onMouseUp	= function(event)
 
 VirtualJoystick.prototype._onMouseDown	= function(event)
 {
+	// notify event for validation
+	var isValid	= this.dispatchEvent('mouseStartValidation', event);
+	if( isValid === false )	return;
+
 	event.preventDefault();
 	var x	= event.clientX;
 	var y	= event.clientY;

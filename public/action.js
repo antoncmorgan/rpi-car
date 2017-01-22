@@ -1,12 +1,63 @@
-$("#forward").click(function(){
-  $.get("http://192.168.1.92:3000/?direction=forward", function(data, status){
-    });
+$("#forward").click(function () {
+  $.get("http://192.168.1.92:3000/?direction=forward", function (data, status) {
+  });
 });
-$("#backward").click(function(){
- $.get("http://192.168.1.92:3000/?direction=backward", function(data, status){
-    });
+$("#backward").click(function () {
+  $.get("http://192.168.1.92:3000/?direction=backward", function (data, status) {
+  });
 });
-$("#stop").click(function(){
- $.get("http://192.168.1.92:3000/?direction=stop", function(data, status){
-    });
+$("#stop").click(function () {
+  $.get("http://192.168.1.92:3000/?direction=stop", function (data, status) {
+  });
 });
+
+var initJoystick = function (element) {
+  var joysticks = {
+    left: {},
+    right: {},
+    maxRadius: 140*window.devicePixelRatio
+  }
+
+  joysticks.left = new VirtualJoystick({
+    container: element,
+    mouseSupport: true,
+    strokeStyle: 'cyan',
+    limitStickTravel: true,
+    stickRadius: joysticks.maxRadius
+  });
+  joysticks.left.addEventListener('mouseStartValidation', function (event) {
+    event.preventDefault();
+    var x = event.clientX;
+    var y = event.clientY;
+    if (x >= window.innerWidth / 2) return false;
+    return true
+  });
+  joysticks.left.addEventListener('touchStartValidation', function (event) {
+    var touch = event.changedTouches[0];
+    if (touch.pageX >= window.innerWidth / 2) return false;
+    return true
+  });
+
+  joysticks.right = new VirtualJoystick({
+    container: element,
+    mouseSupport: true,
+    strokeStyle: 'orange',
+    limitStickTravel: true,
+    stickRadius: joysticks.maxRadius
+  });
+
+  joysticks.right.addEventListener('mouseStartValidation', function (event) {
+    event.preventDefault();
+    var x = event.clientX;
+    var y = event.clientY;
+    if (x < window.innerWidth / 2) return false;
+    return true
+  });
+  joysticks.right.addEventListener('touchStart', function (event) {
+    var touch = event.changedTouches[0];
+    if (touch.pageX < window.innerWidth / 2) return false;
+    return true
+  });
+
+  return joysticks;
+}

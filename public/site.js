@@ -1,29 +1,19 @@
 
 $(document).ready(function () {
 
-    console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
- 
-    var joystick	= new VirtualJoystick({
-	    container	: document.getElementById('wrapper'),
-	    mouseSupport	: true,
-    });
-    joystick.addEventListener('touchStart', function(){
-	    console.log('down')
-    })
-    joystick.addEventListener('touchEnd', function(){
-        console.log('up')
-    })
+  console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
 
-    setInterval(function(){
-		var outputEl	= document.getElementById('result');
-		outputEl.innerHTML	= '<b>Result:</b> '
-			+ ' dx:'+joystick.deltaX()
-		    + ' dy:'+joystick.deltaY()
-			+ (joystick.right()	? ' right'	: '')
-			+ (joystick.up()	? ' up'		: '')
-		    + (joystick.left()	? ' left'	: '')
-			+ (joystick.down()	? ' down' 	: '')	
-    }, 1/30 * 1000);
+  var joysticks = initJoystick(document.getElementById('wrapper'));
 
+  setInterval(function () {
+    var outputEl = document.getElementById('result');
+    outputEl.innerHTML = '<b>Result:</b> '
+      + ' dx:' + joysticks.left.deltaX()
+      + ' dy:' + joysticks.left.deltaY()
+      + (joysticks.left.right() ? ' right' : '')
+      + (joysticks.left.up() ? ' up' : '')
+      + (joysticks.left.left() ? ' left' : '')
+      + (joysticks.left.down() ? ' down' : '')
+  }, 1 / 30 * 1000);
 
 });
