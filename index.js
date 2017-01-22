@@ -1,12 +1,23 @@
 var express = require('express')
 var url = require('url');
 var python = require('python-shell');
+const WebSocket = require('ws');
 var app = express()
 
 //args: Right (0-255), Left (0-255), Direction (1: forward, 0: background)
 var pySpeed = {
   args: ['40','40','1']
 }
+const wss = new WebSocket.Server({ port: 8080});
+
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(message) {
+    console.log('receieved: %s', message);
+  });
+
+  ws.send('complete');
+});
+
 app.use('/public', express.static('public'))
 
 app.get('/', function (req, res) {
@@ -14,6 +25,7 @@ app.get('/', function (req, res) {
   var query = url_parts.query;
   var direction = req.query.direction;
   var data = req.query.data;
+  console.log(JSON.stringify(req.query));
 
   if (data != undefined) {
     console.log(JSON.stringify(data));

@@ -18,6 +18,7 @@
   "homepage": "https://github.com/amorganPD/rpi-car#readme",
   "dependencies": {
     "express": "^4.14.0",
-    "python-shell": "^0.4.0"
+    "python-shell": "^0.4.0",
+    "ws": "^1.1.1"
   }
 }

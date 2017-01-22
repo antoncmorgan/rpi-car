@@ -20,6 +20,6 @@ $(document).ready(function () {
     if (joysticks.isReady) {
       updateRemoteControl(joysticks);
     }
-  }, 100);
+  }, 1000);
 
 });
