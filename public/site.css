@@ -33,7 +33,6 @@ h1 {
 .direction:hover {
     cursor: pointer;
     background-color: blue;
-    /*box-shadow: 10px 10px 5px #888888;*/
     box-shadow: 0 8px 20px rgba(80,80,80,0.80);
     color: white;
 }
