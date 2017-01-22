@@ -18,21 +18,29 @@ def turnOffMotors():
 #atexit.register(turnOffMotors)
 
 ################################# DC motor test!
-Motor1 = mh.getMotor(3)
-Motor2 = mh.getMotor(4)
+RightFrontMotor = mh.getMotor(1)
+RightRearMotor = mh.getMotor(3)
+LeftFrontMotor = mh.getMotor(2)
+LeftRearMotor = mh.getMotor(4)
 
 if len(sys.argv) > 2:
   if sys.argv[1] == '0' and sys.argv[2] == '0':
     turnOffMotors
   else:
-    Motor1.setSpeed(int(sys.argv[1]))
-    Motor2.setSpeed(int(sys.argv[2]))
+    RightFrontMotor.setSpeed(int(sys.argv[1]))
+    RightRearMotor.setSpeed(int(sys.argv[1]))
+    LeftFrontMotor.setSpeed(int(sys.argv[2]))
+    LeftRearMotor.setSpeed(int(sys.argv[2]))
     if sys.argv[3] == '1':
-      Motor1.run(Adafruit_MotorHAT.FORWARD);
-      Motor2.run(Adafruit_MotorHAT.FORWARD);
+      RightFrontMotor.run(Adafruit_MotorHAT.FORWARD);
+      RightRearMotor.run(Adafruit_MotorHAT.FORWARD);
+      LeftFrontMotor.run(Adafruit_MotorHAT.FORWARD);
+      LeftRearMotor.run(Adafruit_MotorHAT.FORWARD);
     else:
-      Motor1.run(Adafruit_MotorHAT.BACKWARD);
-      Motor2.run(Adafruit_MotorHAT.BACKWARD);
+      RightFrontMotor.run(Adafruit_MotorHAT.BACKWARD);
+      RightRearMotor.run(Adafruit_MotorHAT.BACKWARD);
+      LeftFrontMotor.run(Adafruit_MotorHAT.BACKWARD);
+      LeftRearMotor.run(Adafruit_MotorHAT.BACKWARD);
 
 
 
