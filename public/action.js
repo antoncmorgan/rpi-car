@@ -11,7 +11,13 @@ $("#stop").click(function () {
   });
 });
 
-var ws = new WebSocket('ws://192.168.1.92');
+var ws = new WebSocket('ws://192.168.1.92:8080');
+ws.addEventListener('open',function open() {
+  ws.send("New Connection");
+});
+ws.addEventListener('message', function incoming(data, flags) {
+  console.log(data);
+});
 
 var updateRemoteControl = function (joysticks) {
   var data = {
@@ -24,13 +30,7 @@ var updateRemoteControl = function (joysticks) {
   if (!joysticks.noMovement) {
     // var encodedData = encodeURIComponent(JSON.stringify(data));
     if (ws.readyState == 1) {
-      ws.on('open', function open() {
-        ws.send(JSON.stringify(data));
-      });
-
-      ws.on('message', function incoming(data, flags) {
-        console.log(data);
-      });
+      ws.send(JSON.stringify(data));
     }
   }
   joysticks.previousLeft = data.left;
