@@ -11,6 +11,8 @@ $("#stop").click(function () {
   });
 });
 
+var ws = new WebSocket('ws://192.168.1.92');
+
 var updateRemoteControl = function (joysticks) {
   var data = {
     left: ((joysticks.maxRadius - joysticks.left.deltaY()) / joysticks.maxRadius) - 1,
@@ -20,9 +22,16 @@ var updateRemoteControl = function (joysticks) {
   joysticks.noMovement = (data.left == joysticks.previousLeft && data.right == joysticks.previousRight);
   
   if (!joysticks.noMovement) {
-    var encodedData = encodeURIComponent(JSON.stringify(data));
-    $.get("http://192.168.1.92:3000/?" + encodedData, function (data, status) {
-    });
+    // var encodedData = encodeURIComponent(JSON.stringify(data));
+    if (ws.readyState == 1) {
+      ws.on('open', function open() {
+        ws.send(JSON.stringify(data));
+      });
+
+      ws.on('message', function incoming(data, flags) {
+        console.log(data);
+      });
+    }
   }
   joysticks.previousLeft = data.left;
   joysticks.previousRight = data.right;
