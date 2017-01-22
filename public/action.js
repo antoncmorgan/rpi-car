@@ -11,11 +11,32 @@ $("#stop").click(function () {
   });
 });
 
+var updateRemoteControl = function (joysticks) {
+  var data = {
+    left: ((joysticks.maxRadius - joysticks.left.deltaY()) / joysticks.maxRadius) - 1,
+    right: ((joysticks.maxRadius - joysticks.right.deltaY()) / joysticks.maxRadius) - 1
+  };
+
+  joysticks.noMovement = (data.left == joysticks.previousLeft && data.right == joysticks.previousRight);
+  
+  if (!joysticks.noMovement) {
+    var encodedData = encodeURIComponent(JSON.stringify(data));
+    $.get("http://192.168.1.92:3000/?" + encodedData, function (data, status) {
+    });
+  }
+  joysticks.previousLeft = data.left;
+  joysticks.previousRight = data.right;
+}
+
 var initJoystick = function (element) {
   var joysticks = {
     left: {},
     right: {},
-    maxRadius: 140*window.devicePixelRatio
+    maxRadius: 140 * window.devicePixelRatio,
+    previousLeft: 0,
+    previousRight: 0,
+    noMovement: true,
+    isReady: false
   }
 
   joysticks.left = new VirtualJoystick({
@@ -58,6 +79,8 @@ var initJoystick = function (element) {
     if (touch.pageX < window.innerWidth / 2) return false;
     return true
   });
+
+  joysticks.isReady = true;
 
   return joysticks;
 }

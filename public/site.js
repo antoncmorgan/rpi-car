@@ -16,4 +16,10 @@ $(document).ready(function () {
       + (joysticks.left.down() ? ' down' : '')
   }, 1 / 30 * 1000);
 
+  updateControlsId = setInterval(function () {
+    if (joysticks.isReady) {
+      updateRemoteControl(joysticks);
+    }
+  }, 100);
+
 });
