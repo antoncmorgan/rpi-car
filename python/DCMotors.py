@@ -25,8 +25,8 @@ if len(sys.argv) > 2:
   if sys.argv[1] == '0' and sys.argv[2] == '0':
     turnOffMotors
   else:
-    Motor1.setSpeed(sys.argv[1])
-    Motor2.setSpeed(sys.argv[2])
+    Motor1.setSpeed(int(sys.argv[1]))
+    Motor2.setSpeed(int(sys.argv[2]))
     if sys.argv[3] == '1':
       Motor1.run(Adafruit_MotorHAT.FORWARD);
       Motor2.run(Adafruit_MotorHAT.FORWARD);
