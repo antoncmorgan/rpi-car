@@ -82,7 +82,7 @@ var initJoystick = function (element) {
     if (x < window.innerWidth / 2) return false;
     return true
   });
-  joysticks.right.addEventListener('touchStart', function (event) {
+  joysticks.right.addEventListener('touchStartValidation', function (event) {
     var touch = event.changedTouches[0];
     if (touch.pageX < window.innerWidth / 2) return false;
     return true
