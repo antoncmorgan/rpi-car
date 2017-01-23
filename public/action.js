@@ -13,7 +13,6 @@ $("#stop").click(function () {
 
 var ws = new WebSocket('ws://192.168.1.92:8080');
 ws.addEventListener('open',function open() {
-  ws.send("New Connection");
 });
 ws.addEventListener('message', function incoming(data, flags) {
   console.log(data);
