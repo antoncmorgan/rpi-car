@@ -17,7 +17,7 @@ def turnOffMotors():
 
 #atexit.register(turnOffMotors)
 
-################################# DC motor test!
+################################# DC motor test! 
 RightFrontMotor = mh.getMotor(1)
 RightRearMotor = mh.getMotor(3)
 LeftFrontMotor = mh.getMotor(2)
@@ -27,20 +27,28 @@ if len(sys.argv) > 2:
   if sys.argv[1] == '0' and sys.argv[2] == '0':
     turnOffMotors
   else:
-    RightFrontMotor.setSpeed(int(sys.argv[1]))
-    RightRearMotor.setSpeed(int(sys.argv[1]))
-    LeftFrontMotor.setSpeed(int(sys.argv[2]))
-    LeftRearMotor.setSpeed(int(sys.argv[2]))
-    if sys.argv[3] == '1':
-      RightFrontMotor.run(Adafruit_MotorHAT.FORWARD);
-      RightRearMotor.run(Adafruit_MotorHAT.FORWARD);
-      LeftFrontMotor.run(Adafruit_MotorHAT.FORWARD);
-      LeftRearMotor.run(Adafruit_MotorHAT.FORWARD);
+    newRightSpeed = int(sys.argv[1])
+    newLeftSpeed = int(sys.argv[2])
+    if newRightSpeed < 0:
+      newRightSpeed = -newRightSpeed
+      rightDirection = Adafruit_MotorHAT.BACKWARD
     else:
-      RightFrontMotor.run(Adafruit_MotorHAT.BACKWARD);
-      RightRearMotor.run(Adafruit_MotorHAT.BACKWARD);
-      LeftFrontMotor.run(Adafruit_MotorHAT.BACKWARD);
-      LeftRearMotor.run(Adafruit_MotorHAT.BACKWARD);
+      rightDirection = Adafruit_MotorHAT.FORWARD
+
+    if newLeftSpeed < 0:
+      newLeftSpeed = -newLeftSpeed;
+      leftDirection = Adafruit_MotorHAT.BACKWARD
+    else:
+      leftDirection = Adafruit_MotorHAT.FORWARD
+
+    RightFrontMotor.setSpeed(newRightSpeed)
+    RightRearMotor.setSpeed(newRightSpeed)
+    LeftFrontMotor.setSpeed(newLeftSpeed)
+    LeftRearMotor.setSpeed(newLeftSpeed)
+    RightFrontMotor.run(rightDirection)
+    RightRearMotor.run(rightDirection)
+    LeftFrontMotor.run(leftDirection)
+    LeftRearMotor.run(leftDirection)
 
 
 

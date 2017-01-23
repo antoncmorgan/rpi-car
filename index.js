@@ -4,15 +4,21 @@ var python = require('python-shell');
 const WebSocket = require('ws');
 var app = express()
 
-//args: Right (0-255), Left (0-255), Direction (1: forward, 0: background)
+//args: Right (-255 to 255), Left (-255 to 255)
 var pySpeed = {
-  args: ['40','40','1']
+  args: ['0','0']
 }
 const wss = new WebSocket.Server({ port: 8080});
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
-    console.log('receieved: %s', message);
+    var data = JSON.parse(message);
+    var left = Math.round(data.left*255);
+    var right = Math.round(data.right*255);
+    
+    pySpeed.args = [right.toString(), left.toString()];
+    python.run('./python/DCMotors.py', pySpeed, function () {
+    });
   });
 
   ws.send('complete');
@@ -24,28 +30,22 @@ app.get('/', function (req, res) {
   var url_parts = url.parse(req.url, true);
   var query = url_parts.query;
   var direction = req.query.direction;
-  var data = req.query.data;
-  console.log(JSON.stringify(req.query));
 
-  if (data != undefined) {
-    console.log(JSON.stringify(data));
-    res.send(JSON.stringify(data));
-  }
-  else if (direction != undefined) {
+  if (direction != undefined) {
     if (direction == 'forward') {
-      pySpeed.args = ['120','120','1'];
+      pySpeed.args = ['120','120'];
       python.run('./python/DCMotors.py', pySpeed, function () {
         console.log("Going Forward");
       });
     }
     else if (direction == 'backward') {
-      pySpeed.args = ['120','120','0'];
+      pySpeed.args = ['-120','-120'];
       python.run('./python/DCMotors.py', pySpeed, function () {
         console.log("Going Backwards");
       });
     }
     else if (direction == 'stop') {
-      pySpeed.args = ['0','0','1'];
+      pySpeed.args = ['0','0'];
       python.run('./python/DCMotors.py', pySpeed, function() {
         console.log("Stopping");
       });
