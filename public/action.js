@@ -40,7 +40,7 @@ var initJoystick = function (element) {
   var joysticks = {
     left: {},
     right: {},
-    maxRadius: 140 * window.devicePixelRatio,
+    maxRadius: 50 * window.devicePixelRatio,
     previousLeft: 0,
     previousRight: 0,
     noMovement: true,
